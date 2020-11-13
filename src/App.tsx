@@ -1,8 +1,8 @@
 import React from 'react';
-import Editor from './Editor';
+import MyEditor from './MyEditor';
 
 function App() {
-  return <Editor />;
+  return <MyEditor />;
 }
 
 export default App;
