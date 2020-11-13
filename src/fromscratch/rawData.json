@@ -1,0 +1,37 @@
+{
+  "text": "abc 123",
+  "characterList": [
+    {
+      "style": []
+    },
+    {
+      "style": [
+        "BOLD"
+      ]
+    },
+    {
+      "style": []
+    },
+    {
+      "style": []
+    },
+    {
+      "style": []
+    },
+    {
+      "style": [
+        "BOLD"
+      ]
+    },
+    {
+      "style": []
+    }
+  ],
+  "selection": {
+    "selectionStart": null,
+    "selectionEnd" : null,
+    "focusOffset": 0,
+    "isBackward": false,
+    "hasFocus": false
+  }
+}
