@@ -1,4 +1,3 @@
-import 'es6-shim';
 import React, { useState } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 
