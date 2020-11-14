@@ -1,5 +1,26 @@
 import { RawData, CharacterStyle } from './types';
 
+// NOTE: repetitive logic in wrapping chars in html&md tags.
+//       could potentially create a single function for both.
+
+export const rawToHtml = (data: RawData): string => {
+  let htmlOutput = '';
+  data.characterList.forEach((charObj, idx) => {
+    const char: string = data.text[idx];
+    htmlOutput += applyHtmlStyles(char, charObj.style);
+  });
+  return htmlOutput;
+};
+
+export const rawToMarkdown = (data: RawData): string => {
+  let mdOutput = '';
+  data.characterList.forEach((charObj, idx) => {
+    const char: string = data.text[idx];
+    mdOutput += applyMdStyles(char, charObj.style);
+  });
+  return mdOutput;
+};
+
 const applyHtmlStyles = (char: string, styles: CharacterStyle[]): string => {
   let styledChar = char;
   styles.forEach(style => {
@@ -32,24 +53,4 @@ const applyMdStyles = (char: string, styles: CharacterStyle[]): string => {
     }
   });
   return styledChar;
-};
-
-export const rawToHtml = (data: RawData): string => {
-  let htmlOutput = '';
-  data.characterList.forEach((charObj, idx) => {
-    const char: string = data.text[idx];
-    htmlOutput += applyHtmlStyles(char, charObj.style);
-  });
-  console.log('rawtohtml output:', htmlOutput);
-  return htmlOutput;
-};
-
-export const rawToMarkdown = (data: RawData): string => {
-  let mdOutput = '';
-  data.characterList.forEach((charObj, idx) => {
-    const char: string = data.text[idx];
-    mdOutput += applyMdStyles(char, charObj.style);
-  });
-  console.log('rawtomd output:', mdOutput);
-  return mdOutput;
 };

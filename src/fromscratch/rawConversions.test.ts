@@ -2,7 +2,7 @@
 import { RawData } from './types';
 import { rawToMarkdown, rawToHtml } from './rawConversions';
 
-// assume RawData properties of text and characterList are mapped 1 to 1
+// assume RawData properties of text and characterList are properly mapped 1 to 1
 test('Raw data characterList and text property should be equal length', (): void => {
   expect(testRaw.text.length).toEqual(testRaw.characterList.length);
   expect(simpleRaw.text.length).toEqual(simpleRaw.characterList.length);
@@ -23,6 +23,11 @@ test('should parse RawData object with simple formatting to HTML', (): void => {
   expect(rawToHtml(testRaw)).toEqual('a<strong>b</strong>c 1<em>2</em>3');
 });
 
+test('should handle parsing strange spacing', (): void => {
+  expect(rawToHtml(weirdSpaces)).toEqual('    1  2 3 3434  ');
+  expect(rawToMarkdown(weirdSpaces)).toEqual('    1  2 3 3434  ');
+});
+
 test('should handle characters containing multiple styles', (): void => {
   expect(rawToHtml(boldAndItalicWord)).toEqual(
     '<em><strong>h</strong></em><em><strong>e</strong></em><em><strong>l</strong></em><em><strong>l</strong></em><em><strong>o</strong></em>'
@@ -36,7 +41,7 @@ test('should handle characters containing multiple styles', (): void => {
 
 // TODO: test escape characters
 
-// Test raw data sets:
+// RawData sets:
 
 const emptyRaw: RawData = {
   text: '',
@@ -97,6 +102,36 @@ const boldAndItalicWord: RawData = {
     { style: ['BOLD', 'ITALIC'] },
     { style: ['BOLD', 'ITALIC'] },
     { style: ['BOLD', 'ITALIC'] },
+  ],
+  selection: {
+    selectionStart: null,
+    selectionEnd: null,
+    focusOffset: 0,
+    isBackward: false,
+    hasFocus: false,
+  },
+};
+
+const weirdSpaces: RawData = {
+  text: '    1  2 3 3434  ', // 17 chars
+  characterList: [
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
+    { style: [] },
   ],
   selection: {
     selectionStart: null,
