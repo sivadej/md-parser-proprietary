@@ -1,28 +1,55 @@
-import { RawData } from './types';
+import { RawData, CharacterStyle } from './types';
 
-// assume RawData properties of text and characterList are mapped 1 to 1
+const applyHtmlStyles = (char: string, styles: CharacterStyle[]): string => {
+  let styledChar = char;
+  styles.forEach(style => {
+    switch (style) {
+      case 'BOLD':
+        styledChar = `<strong>${styledChar}</strong>`;
+        break;
+      case 'ITALIC':
+        styledChar = `<em>${styledChar}</em>`;
+        break;
+      default:
+        break;
+    }
+  });
+  return styledChar;
+};
 
-const wrapWithStyle = (char: string, style: string): string => {
-  switch (style) {
-    case 'BOLD':
-      return `<strong>${char}</strong>`;
-    case 'ITALIC':
-      return `<em>${char}</em>`;
-    default:
-      return char;
-  }
+const applyMdStyles = (char: string, styles: CharacterStyle[]): string => {
+  let styledChar = char;
+  styles.forEach(style => {
+    switch (style) {
+      case 'BOLD':
+        styledChar = `**${styledChar}**`;
+        break;
+      case 'ITALIC':
+        styledChar = `*${styledChar}*`;
+        break;
+      default:
+        break;
+    }
+  });
+  return styledChar;
 };
 
 export const rawToHtml = (data: RawData): string => {
   let htmlOutput = '';
-  // iterate over text, apply styles as needed and append to output
-  data.characterList.forEach((char, idx) => {
-    console.log(data.text[idx]);
+  data.characterList.forEach((charObj, idx) => {
+    const char: string = data.text[idx];
+    htmlOutput += applyHtmlStyles(char, charObj.style);
   });
+  console.log('rawtohtml output:', htmlOutput);
   return htmlOutput;
 };
 
 export const rawToMarkdown = (data: RawData): string => {
   let mdOutput = '';
+  data.characterList.forEach((charObj, idx) => {
+    const char: string = data.text[idx];
+    mdOutput += applyMdStyles(char, charObj.style);
+  });
+  console.log('rawtomd output:', mdOutput);
   return mdOutput;
 };

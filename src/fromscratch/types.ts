@@ -16,4 +16,4 @@ export interface Character {
   style: CharacterStyle[];
 }
 
-export type CharacterStyle = 'BOLD' | 'ITALIC' | 'UNDERLINE';
+export type CharacterStyle = 'BOLD' | 'ITALIC';
