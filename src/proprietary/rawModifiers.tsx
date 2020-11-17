@@ -14,6 +14,7 @@ export const insert = (
   const text: string = data.text;
 
   const newCharObj: Character = { style: [...styles] };
+  const newCharacterList = [...data.characterList, newCharObj]; //.splice(position, 0, newCharObj)
   const textArr: any = Array.from(text);
   textArr.splice(position, 0, char);
   const newText = textArr.join('');
@@ -21,7 +22,7 @@ export const insert = (
 
   return {
     text: newText,
-    characterList: [...data.characterList].splice(position, 0, newCharObj),
+    characterList: newCharacterList,
     selection: {
       ...data.selection,
       selectionStart: newPosition,

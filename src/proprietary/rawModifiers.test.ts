@@ -2,11 +2,22 @@
 import { insert } from './rawModifiers';
 import { RawData } from './types';
 
-test('insertion into basic unstyled data state', (): void => {
+test('insertion into unstyled data states', (): void => {
   const inserted = insert(emptyRaw, 'x', []);
-  console.log(emptyRaw.text);
-  console.log(inserted.text);
-  expect(inserted.text).toEqual('xabc');
+  expect(inserted.text).toEqual('x');
+
+  const inserted2 = insert(simpleRaw, 'z', []);
+  expect(inserted2.text).toEqual('abcz123');
+});
+
+test('insertion with styling properties', (): void => {
+  const inserted = insert(emptyRaw, 'x', ['BOLD']);
+  expect(inserted.text).toEqual('x');
+  //console.log(inserted.characterList[0].style);
+  //expect(inserted.characterList[0].style[0].toEqual('BOLD'));
+
+  //const inserted2 = insert(simpleRaw, 'z', ['BOLD', 'ITALIC']);
+  //expect(inserted2.characterList[3].style[1].toEqual('ITALIC'));
 });
 
 // test for single unstyled character insertion
@@ -18,7 +29,7 @@ test('insertion into basic unstyled data state', (): void => {
 // RawData sets:
 
 const emptyRaw: RawData = {
-  text: 'abc',
+  text: '',
   characterList: [],
   selection: {
     selectionStart: 0,
@@ -40,7 +51,7 @@ const simpleRaw: RawData = {
     { style: [] },
   ],
   selection: {
-    selectionStart: null,
+    selectionStart: 3,
     selectionEnd: null,
     focusOffset: 0,
     isBackward: false,

@@ -54,3 +54,17 @@ const applyMdStyles = (char: string, styles: CharacterStyle[]): string => {
   });
   return styledChar;
 };
+
+export const parseMd = (md: string): RawData => {
+  return {
+    text: '',
+    characterList: [],
+    selection: {
+      selectionStart: null,
+      selectionEnd: null,
+      focusOffset: 0,
+      isBackward: false,
+      hasFocus: false,
+    },
+  };
+};

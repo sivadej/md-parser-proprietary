@@ -38,7 +38,6 @@ test('should handle characters containing multiple styles', (): void => {
 });
 
 // TODO: test should handle line breaks
-
 // TODO: test escape characters
 
 // RawData sets:
