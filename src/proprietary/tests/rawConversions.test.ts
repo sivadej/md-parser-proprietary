@@ -1,6 +1,6 @@
 // unit tests for raw data to html/md conversions
-import { RawData } from './types';
-import { rawToMarkdown, rawToHtml } from './rawConversions';
+import { RawData } from '../types';
+import { rawToMarkdown, rawToHtml } from '../rawConversions';
 
 // assume RawData properties of text and characterList are properly mapped 1 to 1
 test('Raw data characterList and text property should be equal length', (): void => {

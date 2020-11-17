@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { insert } from './proprietary/rawModifiers';
 import { CharacterStyle, RawData } from './proprietary/types';
 import { rawToHtml, rawToMarkdown } from './proprietary/rawConversions';
+import { parseMd } from './proprietary/mdToRawParser';
 
 export default function Proprietary() {
   const [raw, setRaw] = useState(initialRaw);
