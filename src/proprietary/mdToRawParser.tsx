@@ -1,4 +1,4 @@
-import { Character, RawData } from './types';
+import { RawData } from './types';
 
 export const parseMd = (md: string): RawData => {
   let rawObj = { ...emptyData }; // initialize data object

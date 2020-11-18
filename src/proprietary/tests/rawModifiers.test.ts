@@ -1,6 +1,6 @@
 // unit tests for raw data insertion/deletion
-import { insert } from './rawModifiers';
-import { RawData } from './types';
+import { insert } from '../rawModifiers';
+import { RawData } from '../types';
 
 test('insertion into unstyled data states', (): void => {
   const inserted = insert(emptyRaw, 'x', []);
