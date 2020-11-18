@@ -1,4 +1,4 @@
-import { RawData } from './types';
+import { Character, RawData } from './types';
 
 export const parseMd = (md: string): RawData => {
   let rawObj = { ...emptyData }; // initialize data object
@@ -6,12 +6,31 @@ export const parseMd = (md: string): RawData => {
   const boldRgxMatcher = /\*\*([\s\S]+?)\*\*/g;
   const boldMatches = getMatchesArray(md, boldRgxMatcher);
 
-  console.log('boldmatches', boldMatches);
-  console.log('getTextString() =>', getTextString(md, boldMatches));
+  const textString = getTextString(md, boldMatches);
 
-  rawObj.text = getTextString(md, boldMatches);
+  const indexesOfMatchesInMd = boldMatches.map(match => match.index);
+  const boldTextIndexes = getIndexesOfMatchesInText(indexesOfMatchesInMd, 2);
+
+  rawObj.text = textString;
+  rawObj.characterList = generateCharacterList(
+    textString,
+    boldTextIndexes,
+    'BOLD'
+  );
 
   return rawObj;
+};
+
+const generateCharacterList = (
+  text: string,
+  indexes: Array<number>,
+  styleType: string
+): any => {
+  const charList = Array.from(text).map((char, i) => {
+    if (indexes.includes(i)) return { style: [styleType] };
+    else return { style: [] };
+  });
+  return charList;
 };
 
 const getMatchesArray = (md: string, rgx: RegExp): any[] => {
@@ -29,15 +48,24 @@ const getTextString = (md: string, matchData: any[]): string => {
 };
 
 // calculate index locations of markdown matches at textString.
-// offset: amount of extra characters from markdown tag (bold => ** ** => 4)
-const getIndexesToStyle = (
-  md: string,
-  matchData: any[],
-  offset: number
+// example: **a**b**c** => [0, 2]
+const getIndexesOfMatchesInText = (
+  mdMatchIndexes: Array<number>,
+  offset: number //amount of extra characters from markdown tag (ex: bold => ** => 2)
 ): Array<number> => {
-  // number of matchers is matchData.length
-  //
-  return [-1];
+  console.log(mdMatchIndexes);
+  const textStringMatchIndexes = mdMatchIndexes.map((mdIndex, i) => {
+    console.log(
+      `match #${i + 1}: char found at mdIndex ${
+        mdIndex + offset
+      } will be at textString index ${
+        mdIndex - offset * 2 - offset * 2 * (i - 1)
+      }`
+    );
+    return mdIndex - offset * 2 - offset * 2 * (i - 1);
+  });
+  console.log('returning array', textStringMatchIndexes);
+  return textStringMatchIndexes;
 };
 
 const emptyData: RawData = {
