@@ -1,8 +1,15 @@
 import React from 'react';
-import MyEditor from './MyEditor';
+import FlyntEditor from './FlyntEditor';
 
 function App() {
-  return <MyEditor />;
+  const markdown = 'Hello **Flyntlok**';
+  function handleSubmit(md: string) {
+    alert(md);
+    console.log(md);
+  }
+  return (
+    <FlyntEditor initialData={markdown} onSubmit={handleSubmit} focusOnMount />
+  );
 }
 
 export default App;

@@ -5,6 +5,11 @@ import { Editor, EditorState } from 'draft-js';
 
 import styles from './EditorUI.module.css';
 
+/**
+ * UI Component for DraftJS Editor with toggled
+ * style options
+ *  */
+
 interface EditorUIProps {
   editorState: EditorState;
   onChange: (e: EditorState) => void;
@@ -16,12 +21,13 @@ interface EditorUIProps {
   isBoldToggled?: boolean;
   isItalicToggled?: boolean;
   onStyleBtnClick: (style: EditorStyle) => void;
+  onSubmit: () => void;
 }
 
 type EditorStyle = 'BOLD' | 'ITALIC' | 'STRIKETHROUGH';
 
 export default function EditorUI(props: EditorUIProps): JSX.Element {
-  const { isBoldToggled, isItalicToggled, onStyleBtnClick } = props;
+  const { isBoldToggled, isItalicToggled, onStyleBtnClick, onSubmit } = props;
   const {
     container,
     iconRow,
@@ -33,6 +39,7 @@ export default function EditorUI(props: EditorUIProps): JSX.Element {
     btnStyleControl,
     btnToggledOn,
   } = styles;
+
   return (
     <div className={container}>
       <div className={messageRow}>
@@ -64,7 +71,9 @@ export default function EditorUI(props: EditorUIProps): JSX.Element {
           </button>
         </div>
         <div className={iconRowRight}>
-          <button className={btnSend}>Send</button>
+          <button className={btnSend} onClick={onSubmit}>
+            Send
+          </button>
         </div>
       </div>
     </div>
