@@ -1,0 +1,97 @@
+.container {
+  border: 1px solid black;
+  border-radius: 0.2em;
+  margin: 0.4em;
+  padding: 0;
+}
+
+.messageRow {
+  background-color: inherit;
+  border-radius: inherit;
+  padding: 0.7em;
+}
+
+.inputBox {
+  border: 0;
+  background-color: inherit;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.inputBox:focus {
+  outline: none;
+}
+
+.inputBox::placeholder {
+  opacity: 0.3;
+}
+
+.inputBox::-ms-input-placeholder {
+  color: #757575;
+}
+
+.iconRow {
+  padding: 0.5em;
+  border-radius: 0 0 0.2em 0.2em;
+  border-top: 1px solid rgb(226, 226, 226);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: rgb(248, 248, 248);
+}
+
+.iconRowLeft {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+}
+
+.iconRowRight {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-grow: 0;
+}
+
+.btnSend {
+  background-color: rgb(60, 129, 60);
+  border: 0;
+  color: white;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  outline: none;
+}
+
+.btnSend:disabled {
+  background-color: rgb(189, 189, 189);
+}
+
+.btnStyleControl {
+  background-color: transparent;
+  border-radius: 0.2em;
+  border: 0;
+  padding: 0.5em;
+  margin-right: 1px;
+  width: 2.2em;
+  font-weight: 500;
+  font-size: 0.9em;
+  outline: none;
+}
+
+.btnStyleControl:hover {
+  background-color: rgba(189, 189, 189, 0.5);
+}
+
+.btnStyleControl:active {
+  background-color: rgba(112, 30, 30, 0);
+}
+
+.btnToggledOn {
+  background-color: rgba(189, 189, 189, 0.75);
+}
+
+.btnStyleControl:disabled:hover {
+  background-color: inherit;
+}
